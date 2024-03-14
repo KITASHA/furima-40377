@@ -11,8 +11,8 @@
 | birthday           | date       | null: false                   |
 
 ### Association
---has_many : items
---has_many : orders
+--has_many :items
+--has_many :orders
 
 
 ## Items Table
@@ -24,25 +24,25 @@
 | item_status_id     | integer    | null: false                    |
 | fee_status_id      | integer    | null: false                    |
 | pretectur_id       | integer    | null: false                    |
-| shipping_days_id   | integer    | null: false                    |
+| shipping_day_id   | integer    | null: false                    |
 | item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
---belongs_to : user
---has_one   : order
+--belongs_to :user
+--has_one :order
 
 
-## Order Table
+## Orders Table
 | Column             | Type       | Options                        |
 |--------------------|------------|--------------------------------|
 | user               | references | null: false, foreign_key: true |
 | item               | references | null: false, foreign_key: true |
 
 ### Association
---belongs_to : user
---belongs_to : item
---has_many  : order
+--belongs_to :user
+--belongs_to :item
+--has_one :order
 
 
 ## Addresses Table
@@ -57,4 +57,4 @@
 | order              | references | null: false, foreign_key: true |
 
 ### Association
---belongs_to :  order
+--belongs_to :order
