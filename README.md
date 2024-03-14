@@ -18,16 +18,18 @@
 ## Items Table
 | Column             |Type        |Options                         |
 |--------------------|------------|--------------------------------|
-| item_category      | string     | null: false                    |
-| item_status        | string     | null: false                    |
-| fee_status         | string     | null: false                    |
-| pretectur          | string     | null: false                    |
-| shipping_days      | string     | null: false                    |
+| item_name          | string     | null: false                    |
+| item_info          | text       | null: false                    |
+| item_category_id   | integer    | null: false                    |
+| item_status_id     | integer    | null: false                    |
+| fee_status_id      | integer    | null: false                    |
+| pretectur_id       | integer    | null: false                    |
+| shipping_days_id   | integer    | null: false                    |
 | item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
---belong_to : user
+--belongs_to : user
 --has_one   : order
 
 
@@ -38,8 +40,8 @@
 | item               | references | null: false, foreign_key: true |
 
 ### Association
---belong_to : user
---belong_to : item
+--belongs_to : user
+--belongs_to : item
 --has_many  : order
 
 
@@ -47,7 +49,7 @@
 | Column             | Type       | Options                        |
 |--------------------|------------|--------------------------------|
 | post_code          | string     | null: false                    |
-| prefectur          | string     | null: false                    |
+| pretectur_id       | integer    | null: false                    |
 | city               | string     | null: false                    |
 | street             | string     | null: false                    |
 | building           | string     |                                |
@@ -55,4 +57,4 @@
 | order              | references | null: false, foreign_key: true |
 
 ### Association
---belong_to :  order
+--belongs_to :  order
