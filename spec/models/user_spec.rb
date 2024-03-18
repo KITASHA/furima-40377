@@ -92,8 +92,8 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_valid
     end
 
-    it 'birthdayが空では登録できない' do
-      @user.birthday = ''
+    it 'birthdayのいずれかの欄が空では登録できない' do
+      @user.birthday = {1=>nil, 2=>6, 3=>15}
       expect(@user).to_not be_valid
     end
   end
