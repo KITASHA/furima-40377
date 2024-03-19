@@ -9,11 +9,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Article.new(article_params)
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, locals: { item: @item }
     end
   end
 
@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(
-      :item_name, :item_info, :item_category_id, :item_status_id, :fee_status_id, :pretecture_id, :shipping_day_id, :item_price
+      :item_name, :item_info, :item_category_id, :item_status_id, :fee_status_id, :pretecture_id, :shipping_day_id, :item_price, :image
       )
       .merge(user_id: current_user.id)
   end
