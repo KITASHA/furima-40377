@@ -23,7 +23,7 @@
 | item_category_id   | integer    | null: false                    |
 | item_status_id     | integer    | null: false                    |
 | fee_status_id      | integer    | null: false                    |
-| pretectur_id       | integer    | null: false                    |
+| pretecture_id       | integer    | null: false                    |
 | shipping_day_id    | integer    | null: false                    |
 | item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
