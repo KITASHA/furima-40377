@@ -4,14 +4,14 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
-  
+
   describe '商品の出品' do
     context '出品できる場合' do
       it '項目をすべて埋めると出品できる' do
         expect(@item).to be_valid
       end
     end
-    
+
     context '出品できない場合' do
       it 'item_nameが空では出品できない' do
         @item.item_name = ''
@@ -64,19 +64,19 @@ RSpec.describe Item, type: :model do
       it 'item_priceが0~299では出品できない' do
         @item.item_price = '0'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Item price must be greater than or equal to 300')
       end
 
       it 'item_priceが10000000以上では出品できない' do
         @item.item_price = '100000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Item price must be less than or equal to 9999999')
       end
 
       it 'item_priceが半角数字でないと出品できない' do
         @item.item_price = '８'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is not a number")
+        expect(@item.errors.full_messages).to include('Item price is not a number')
       end
 
       it '画像が空では出品できない' do
@@ -86,11 +86,10 @@ RSpec.describe Item, type: :model do
       end
 
       it 'ユーザーが紐付いていなければ投稿できない' do
-      @item.user = nil
-      @item.valid?
-      expect(@item.errors.full_messages).to include('User must exist')
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
-
 end

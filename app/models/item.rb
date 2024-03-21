@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
-
   belongs_to :user
-  #has_one :order
+  # has_one :order
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -11,15 +10,15 @@ class Item < ApplicationRecord
   belongs_to :pretecture
   belongs_to :shipping_day
 
-  #空の投稿を保存できないようにする
+  # 空の投稿を保存できないようにする
   validates :item_name, presence: true
   validates :item_info, presence: true
-  validates :item_price, presence: true, 
-    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-  
-  #ジャンルの選択が「---」の時は保存できないようにする
-  validates :item_category_id, :item_status_id , :fee_status_id, :pretecture_id, :shipping_day_id,
-    numericality: { other_than: 1, message: "can't be blank" } 
+  validates :item_price, presence: true,
+                         numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+
+  # ジャンルの選択が「---」の時は保存できないようにする
+  validates :item_category_id, :item_status_id, :fee_status_id, :pretecture_id, :shipping_day_id,
+            numericality: { other_than: 1, message: "can't be blank" }
 
   validate :image_presence
 
