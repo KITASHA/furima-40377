@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true
   validates :item_info, presence: true
   validates :item_price, presence: true,
-                         numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
   # ジャンルの選択が「---」の時は保存できないようにする
   validates :item_category_id, :item_status_id, :fee_status_id, :pretecture_id, :shipping_day_id,
