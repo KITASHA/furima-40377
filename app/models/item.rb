@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  # has_one :order
+  has_one :order
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -25,4 +25,6 @@ class Item < ApplicationRecord
   def image_presence
     errors.add(:image, "can't be blank") unless image.attached?
   end
+
+
 end

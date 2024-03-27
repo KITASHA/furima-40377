@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
+  before_action :move_to_index, only: [:index, :create]
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @item = Item.find(params[:item_id])
+    if user_signed_in? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
     @order_address = OrderAddress.new
   end
 
@@ -31,7 +36,6 @@ class OrdersController < ApplicationController
     )
   end
 
-  
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
@@ -40,4 +44,10 @@ class OrdersController < ApplicationController
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
+
+  def move_to_index
+    return if user_signed_in?
+    redirect_to new_user_session_path
+  end
+
 end
