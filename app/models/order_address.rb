@@ -1,9 +1,9 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :street, :building, :telephone_num, :item_id, :user_id, :token
+  attr_accessor :post_code, :prefecture_id, :city, :street, :building, :telephone_num, :item_id, :user_id, :token,:item_price
 
   with_options presence: true do
-    validates :city, :street, :telephone_num, :item_id, :user_id
+    validates :city, :street, :telephone_num, :item_id, :user_id, :token
     validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :telephone_num, format: { with: /\A\d{10,11}\z/, message: "should be a half-width numeric value with 10 to 11 digits" }
   end
