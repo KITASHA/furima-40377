@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show,]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -19,18 +20,15 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
-    if @item.user_id!= current_user.id
+    if @item.user_id != current_user.id || @item.order.present?
       redirect_to root_path
     end
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path
       flash[:notice] = 'Item was successfully updated.'
@@ -40,9 +38,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    if item.user_id == current_user.id
-    item.destroy
+    if @item.user_id == current_user.id
+    @item.destroy
     redirect_to root_path
     else
       redirect_to item_path
@@ -53,14 +50,17 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(
-      :item_name, :item_info, :item_category_id, :item_status_id, :fee_status_id, :pretecture_id, :shipping_day_id, :item_price, :image
-    )
-          .merge(user_id: current_user.id)
+      :item_name, :item_info, :item_category_id, :item_status_id, :fee_status_id, :prefecture_id, :shipping_day_id, :item_price, :image
+    ).merge(user_id: current_user.id)
   end
 
   def move_to_index
     return if user_signed_in?
-
     redirect_to new_user_session_path
   end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
 end
