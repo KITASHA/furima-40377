@@ -396,6 +396,7 @@ DEPENDENCIES
   jbuilder
   mini_magick
   mysql2 (~> 0.5)
+  net-ssh
   payjp
   pry-rails
   puma (~> 5.0)
