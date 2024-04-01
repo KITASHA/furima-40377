@@ -1,3 +1,5 @@
+require 'net/ssh'
+require 'net/ssh/authentication/ed25519'
 require "capistrano/setup"
 require "capistrano/deploy"
 require 'capistrano/rbenv'
